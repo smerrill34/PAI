@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Polyatomic Ion Study Tool</title>
+
+  <!-- ✅ SCORM integration -->
+  <script src="https://cdn.jsdelivr.net/npm/pipwerks-scorm-api-wrapper@1.1.20180906/dist/pipwerks.SCORM.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f4f8fc;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .mode-btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4285f4;
+      color: white;
+      cursor: pointer;
+    }
+
+    .mode-btn:hover { background-color: #3367d6; }
+
+    .question { font-size: 22px; margin: 20px; }
+
+    .feedback {
+      font-size: 18px;
+      margin: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .answer-btn {
+      display: block;
+      margin: 8px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ccc;
+      color: black;
+      cursor: pointer;
+    }
+
+    .answer-btn:hover { background-color: #ddd; }
+
+    .answer-btn.correct { background-color: #4CAF50 !important; color: white; }
+    .answer-btn.incorrect { background-color: #e74c3c !important; color: white; }
+
+    .formula-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .formula-buttons .answer-btn {
+      background-color: #005fcb;
+      color: white;
+    }
+
+    .formula-buttons .answer-btn:hover {
+      background-color: #004799;
+    }
+
+    .image-container img {
+      max-width: 300px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .progress-bar {
+      width: 80%;
+      height: 20px;
+      margin: 20px auto;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4285f4;
+      transition: width 0.3s;
+    }
+
+    .progress-count {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .completion-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 20px auto;
+      position: relative;
+      background: conic-gradient(#ccc 0%, #ccc 100%);
+      transition: background 0.6s ease-in-out;
+    }
+
+    .completion-ring::after {
+      position: absolute;
+      top: 32px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #formulaRing::after { content: attr(data-rounds) " (Formula)"; }
+    #nameRing::after { content: attr(data-rounds) " (Name)"; }
+
+    .certificate {
+      background: #fff;
+      border: 3px solid #4CAF50;
+      padding: 30px;
+      max-width: 500px;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .certificate h2 { color: #4CAF50; }
+
+    .certificate p { font-size: 18px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Polyatomic Ion Study Tool</h1>
+
+  <div id="main-menu">
+    <label for="learnerName">Your Name:</label>
+    <input id="learnerName" type="text" placeholder="Enter your name" 
+           style="padding:10px; font-size:16px; margin-bottom: 20px; display:block; width:80%; margin:auto;" />
+    <button class="mode-btn" onclick="startFlashcard()">Flashcard Mode</button>
+    <button class="mode-btn" onclick="startFormulaMode()">Formula Mode</button>
+    <button class="mode-btn" onclick="startNameMode()">Name Mode</button>
+  </div>
+
+  <div id="game-area" style="display:none;"></div>
+  <div id="feedback" class="feedback"></div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div id="progressCount" class="progress-count">0/0 Completed</div>
+
+  <div class="completion-ring" id="formulaRing" data-rounds="0/5"></div>
+  <div class="completion-ring" id="nameRing" data-rounds="0/5"></div>
+
+  <!-- Optional placeholder for future certificate injection -->
+  <div id="certificate" style="display:none;"></div>
+
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof updateCompletionRings === "function") {
+        updateCompletionRings();
+      }
+    });
+  </script>
+</body>
+</html>

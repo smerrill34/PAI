@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="com.example.polyatomic" version="1.0"
+  xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 
+                      http://www.imsglobal.org/profile/cc/ccv1p0/ccv1p0_imscp_v1p1.xsd 
+                      http://www.adlnet.org/xsd/adlcp_v1p3 
+                      http://www.adlnet.org/xsd/adlcp_v1p3.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="org1">
+    <organization identifier="org1">
+      <title>Polyatomic Ion Study Tool</title>
+      <item identifier="item1" identifierref="resource1">
+        <title>Polyatomic Ion Study</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="resource1" type="webcontent" adlcp:scormType="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="main.js"/>
+      <file href="scorm.js"/>
+      <!-- Include the SCORM wrapper script -->
+      <file href="pipwerks.SCORM.min.js"/>
+      <!-- List all ion images used -->
+      <file href="acetate.png"/>
+      <file href="carbonate.png"/>
+      <file href="bicarbonate.png"/>
+      <file href="hydroxide.png"/>
+      <file href="nitrate.png"/>
+      <file href="nitrite.png"/>
+      <file href="chromate.png"/>
+      <file href="dichromate.png"/>
+      <file href="phosphate.png"/>
+      <file href="hydrogen_phosphate.png"/>
+      <file href="ammonium.png"/>
+      <file href="hypochlorite.png"/>
+      <file href="chlorite.png"/>
+      <file href="chlorate.png"/>
+      <file href="perchlorate.png"/>
+      <file href="permanganate.png"/>
+      <file href="sulfate.png"/>
+      <file href="sulfite.png"/>
+      <file href="bisulfite.png"/>
+      <file href="bisulfate.png"/>
+      <file href="peroxide.png"/>
+      <file href="cyanide.png"/>
+    </resource>
+  </resources>
+</manifest>
